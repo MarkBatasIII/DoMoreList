@@ -1,8 +1,13 @@
 import SwiftUI
 
 struct CreateView: View {
+
+    @ObservedObject var taskVM: TaskViewModel
+    @Environment(\.dismiss) private var dismiss
     
     @State private var textFieldCreate = ""
+    @State private var errorMessage = ""
+    @State private var showingError = false
     
     var body: some View {
         ScrollView {
@@ -17,13 +22,32 @@ struct CreateView: View {
         }
         .navigationTitle("Create Task")
         .toolbar {
-            Button("Create") { }
+            Button("Save") {
+                if checkInput() {
+                    taskVM.addItem(task: textFieldCreate)
+                    dismiss()
+                }
+            }
         }
+        .alert("Invalid Input", isPresented: $showingError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(errorMessage)
+        }
+    }
+    
+    func checkInput() -> Bool {
+        if(textFieldCreate.count < 3) {
+            errorMessage = "Text is too short."
+            showingError = true
+            return false
+        }
+        return true
     }
 }
 
 #Preview {
     NavigationStack {
-        CreateView()
+        CreateView(taskVM: TaskViewModel())
     }
 }
