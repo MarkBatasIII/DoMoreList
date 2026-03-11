@@ -1,6 +1,6 @@
 import Foundation
 
-struct ItemModel: Identifiable, Codable {
+struct TaskModel: Identifiable, Codable {
     let id: String
     var task: String
     var isCompleted: Bool
