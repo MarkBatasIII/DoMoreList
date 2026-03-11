@@ -1,18 +1,29 @@
-//
-//  CreateView.swift
-//  DoMoreList
-//
-//  Created by Mark Batas on 3/11/26.
-//
-
 import SwiftUI
 
 struct CreateView: View {
+    
+    @State private var textFieldCreate = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            VStack {
+                TextField("What do you want to do?", text: $textFieldCreate)
+                    .padding(.horizontal)
+                    .frame(height: 55)
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
+            }
+            .padding(14)
+        }
+        .navigationTitle("Create Task")
+        .toolbar {
+            Button("Create") { }
+        }
     }
 }
 
 #Preview {
-    CreateView()
+    NavigationStack {
+        CreateView()
+    }
 }

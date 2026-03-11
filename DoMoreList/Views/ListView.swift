@@ -24,7 +24,9 @@ struct ListView: View {
                     EditButton()
                 }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Image(systemName: "plus")
+                    NavigationLink(destination: CreateView()) {
+                        Image(systemName: "plus")
+                    }
                 }
             }
         }
