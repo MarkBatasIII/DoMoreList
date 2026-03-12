@@ -25,7 +25,7 @@ struct ListView: View {
                 }
                 .listStyle(PlainListStyle())
             }
-            .navigationTitle("Things to-do")
+            .navigationTitle("Do More List")
             .navigationViewStyle(StackNavigationViewStyle())
             .toolbar {
                 if !taskVM.tasks.isEmpty {

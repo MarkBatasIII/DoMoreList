@@ -2,32 +2,39 @@ import Foundation
 
 class TaskViewModel: ObservableObject {
     
-    @Published var tasks = [TaskModel]() {
+    private let itemsKey: String = "Items"
+    
+    @Published var tasks: [TaskModel] = [] {
         didSet {
-            let encoder = JSONEncoder()
-            
-            if let encoded = try? encoder.encode(tasks) {
-                UserDefaults.standard.set(encoded, forKey: "Items")
-            }
+            saveItems()
         }
     }
     
     init() {
-        if let saveItems = UserDefaults.standard.data(forKey: "Items") {
-            if let decodedItems = try? JSONDecoder().decode([TaskModel].self, from: saveItems) {
-                tasks = decodedItems
-                return
-            }
-        }
-        tasks = []
+        loadItems()
     }
     
-    func moveItem(from: IndexSet, to: Int) {
-        tasks.move(fromOffsets: from, toOffset: to)
+    // MARK: Save/Load Items
+    
+    private func loadItems() {
+        guard
+            let data = UserDefaults.standard.data(forKey: itemsKey),
+            let decodedItems = try? JSONDecoder().decode([TaskModel].self, from: data)
+        else { return }
+        
+        self.tasks = decodedItems
     }
+    
+    private func saveItems() {
+        if let encoded = try? JSONEncoder().encode(tasks) {
+            UserDefaults.standard.set(encoded, forKey: itemsKey)
+        }
+    }
+    
+    // MARK: Actions
     
     func addItem(task: String) {
-        let newTask = TaskModel(task: task, isCompleted: false)
+        let newTask = TaskModel(task: task, isCompleted: false, subTasks: [])
         tasks.append(newTask)
     }
     
@@ -35,7 +42,13 @@ class TaskViewModel: ObservableObject {
         tasks.remove(atOffsets: offsets)
     }
     
-    func updateTaskCompleted(task: TaskModel ) {
+    func moveItem(from: IndexSet, to: Int) {
+        tasks.move(fromOffsets: from, toOffset: to)
+    }
+    
+    // MARK: Update
+    
+    func updateTaskCompleted(task: TaskModel) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index] = task.updateTaskModel()
         }
