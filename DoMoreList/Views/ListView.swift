@@ -6,24 +6,33 @@ struct ListView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                List {
-                    ForEach(taskVM.tasks) { task in
-                        NavigationLink(destination:
-                            UpdateView(taskVM: taskVM,
-                                       taskModel: task)) {
-                            TaskListView(task: task)
+            List {
+                ForEach(taskVM.tasks) { task in
+                    NavigationLink(destination: UpdateView(taskVM: taskVM, taskModel: task)) {
+                        TaskListView(task: task)
                             .onTapGesture {
                                 withAnimation(.linear) {
                                     taskVM.updateTaskCompleted(task: task)
                                 }
                             }
+                    }
+                    if !task.subTasks.isEmpty {
+                        VStack {
+                            DisclosureGroup("You have \(task.subTasks.count) sub task\(task.subTasks.count > 1 ? "s" : "")") {
+                                ForEach(task.subTasks) { subTask in
+                                    SubTaskListView(subTask: subTask)
+                                        .onTapGesture {
+                                            withAnimation(.linear) {
+                                                taskVM.updateSubTaskCompleted(task: task, subTask: subTask)
+                                            }
+                                        }
+                                }
+                            }
                         }
                     }
-                    .onDelete(perform: taskVM.deleteItem)
-                    .onMove(perform: taskVM.moveItem)
                 }
-                .listStyle(PlainListStyle())
+                .onDelete(perform: taskVM.deleteItem)
+                .onMove(perform: taskVM.moveItem)
             }
             .navigationTitle("Do More List")
             .navigationViewStyle(StackNavigationViewStyle())

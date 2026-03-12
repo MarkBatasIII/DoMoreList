@@ -3,8 +3,8 @@ import Foundation
 struct TaskModel: Identifiable, Codable {
     let id: String
     let task: String
-    let isCompleted: Bool
-    let subTasks: [SubTaskModel]
+    var isCompleted: Bool
+    var subTasks: [SubTaskModel]
     
     init(
         id: String = UUID().uuidString,
@@ -16,14 +16,5 @@ struct TaskModel: Identifiable, Codable {
         self.task = task
         self.isCompleted = isCompleted
         self.subTasks = subTasks
-    }
-    
-    func updateTaskModel() -> TaskModel {
-         return TaskModel(
-            id: id,
-            task: task,
-            isCompleted: !isCompleted,
-            subTasks: subTasks
-         )
     }
 }

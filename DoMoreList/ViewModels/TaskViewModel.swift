@@ -50,7 +50,15 @@ class TaskViewModel: ObservableObject {
     
     func updateTaskCompleted(task: TaskModel) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            tasks[index] = task.updateTaskModel()
+            tasks[index].isCompleted.toggle()
+        }
+    }
+    
+    func updateSubTaskCompleted(task: TaskModel, subTask: SubTaskModel) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            if let subIndex = tasks[index].subTasks.firstIndex(where: { $0.id == subTask.id }) {
+                tasks[index].subTasks[subIndex].isSubCompleted.toggle()
+            }
         }
     }
     
