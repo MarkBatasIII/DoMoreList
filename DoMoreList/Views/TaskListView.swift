@@ -9,11 +9,10 @@ struct TaskListView: View {
             Image(systemName: task.isCompleted ? "checkmark.circle" : "circle")
                 .foregroundColor(task.isCompleted ? .green : .red)
             Text(task.task)
-                .font(.title)
                 .fontWeight(.semibold)
             Spacer()
         }
-        .font(.title2)
+        .font(.headline)
         .padding(.vertical, 5)
         .strikethrough(task.isCompleted, color: .gray)
         .foregroundColor(task.isCompleted ? .secondary : .primary)

@@ -8,11 +8,10 @@ struct SubTaskListView: View {
         HStack {
             Image(systemName: subTask.isSubCompleted ? "checkmark.circle" : "circle")
                 .foregroundColor(subTask.isSubCompleted ? .green : .red)
-            
             Text(subTask.subTask)
             Spacer()
         }
-        .font(.title3)
+        .font(.subheadline)
         .padding(.leading, 30)
         .padding(.top, 5)
         .strikethrough(subTask.isSubCompleted, color: .gray)

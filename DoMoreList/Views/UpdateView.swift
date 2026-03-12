@@ -9,12 +9,21 @@ struct UpdateView: View {
     
     @State private var task: String
     @State private var subTasks: [SubTaskModel]
+    @State private var errorMessage = ""
+    @State private var showingError = false
     
     init(taskVM: TaskViewModel, taskModel: TaskModel) {
         self.taskVM = taskVM
         self.taskModel = taskModel
         _task = State(initialValue: taskModel.task)
         _subTasks = State(initialValue: taskModel.subTasks)
+    }
+    
+    private var isFormValid: Bool {
+        let taskIsEmpty = task.trimmingCharacters(in: .whitespaces).isEmpty
+        let anySubtaskEmpty = subTasks.contains { $0.subTask.trimmingCharacters(in: .whitespaces).isEmpty }
+        
+        return !taskIsEmpty && !anySubtaskEmpty
     }
     
     var body: some View {
@@ -42,9 +51,19 @@ struct UpdateView: View {
         .navigationTitle("Edit")
         .toolbar {
             Button("Update") {
-                taskVM.updateItem(task: taskModel, newTask: task, newSubTasks: subTasks)
-                dismiss()
+                if isFormValid {
+                    taskVM.updateItem(task: taskModel, newTask: task, newSubTasks: subTasks)
+                    dismiss()
+                } else {
+                    errorMessage = "Tasks cannot be empty."
+                    showingError = true
+                }
             }
+        }
+        .alert("Invalid Input", isPresented: $showingError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(errorMessage)
         }
     }
 }

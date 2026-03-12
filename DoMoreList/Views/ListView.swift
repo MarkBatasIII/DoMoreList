@@ -8,16 +8,16 @@ struct ListView: View {
         NavigationStack {
             List {
                 ForEach(taskVM.tasks) { task in
-                    NavigationLink(destination: UpdateView(taskVM: taskVM, taskModel: task)) {
-                        TaskListView(task: task)
-                            .onTapGesture {
-                                withAnimation(.linear) {
-                                    taskVM.updateTaskCompleted(task: task)
+                    VStack {
+                        NavigationLink(destination: UpdateView(taskVM: taskVM, taskModel: task)) {
+                            TaskListView(task: task)
+                                .onTapGesture {
+                                    withAnimation(.linear) {
+                                        taskVM.updateTaskCompleted(task: task)
+                                    }
                                 }
-                            }
-                    }
-                    if !task.subTasks.isEmpty {
-                        VStack {
+                        }
+                        if !task.subTasks.isEmpty {
                             DisclosureGroup("You have \(task.subTasks.count) sub task\(task.subTasks.count > 1 ? "s" : "")") {
                                 ForEach(task.subTasks) { subTask in
                                     SubTaskListView(subTask: subTask)
@@ -28,6 +28,7 @@ struct ListView: View {
                                         }
                                 }
                             }
+                            .font(.subheadline)
                         }
                     }
                 }
