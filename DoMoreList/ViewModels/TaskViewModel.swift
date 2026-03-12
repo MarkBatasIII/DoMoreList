@@ -35,9 +35,26 @@ class TaskViewModel: ObservableObject {
         tasks.remove(atOffsets: offsets)
     }
     
-    func updateItem(task: TaskModel ) {
+    func updateTaskCompleted(task: TaskModel ) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index] = task.updateTaskModel()
+        }
+    }
+    
+    func updateItem(task: TaskModel, newTask: String) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks[index] = TaskModel(
+                id: task.id,
+                task: newTask,
+                isCompleted: task.isCompleted
+            )
+            saveItems()
+        }
+    }
+    
+    func saveItems() {
+        if let encodedData = try? JSONEncoder().encode(tasks) {
+            UserDefaults.standard.set(encodedData, forKey: "Items")
         }
     }
 }

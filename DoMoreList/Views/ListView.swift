@@ -9,12 +9,14 @@ struct ListView: View {
             VStack {
                 List {
                     ForEach(taskVM.tasks) { task in
-                        NavigationLink(destination: UpdateView()) {
+                        NavigationLink(destination:
+                            UpdateView(taskVM: taskVM,
+                                       taskModel: task)) {
                             TaskListView(task: task)
-                        }
-                        .onTapGesture {
-                            withAnimation(.linear) {
-                                taskVM.updateItem(task: task)
+                            .onTapGesture {
+                                withAnimation(.linear) {
+                                    taskVM.updateTaskCompleted(task: task)
+                                }
                             }
                         }
                     }
