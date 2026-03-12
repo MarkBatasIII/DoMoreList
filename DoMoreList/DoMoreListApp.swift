@@ -4,7 +4,7 @@ import SwiftUI
 struct DoMoreListApp: App {
     var body: some Scene {
         WindowGroup {
-            ListView()
+            MainView()
         }
     }
 }
