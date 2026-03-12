@@ -6,8 +6,9 @@ struct UpdateView: View {
     @Environment(\.dismiss) var dismiss
     
     var taskModel: TaskModel
-    @State private var task: String
     
+    @State private var task: String
+    @State private var textSubTasks: [String] = []
     
     init(taskVM: TaskViewModel, taskModel: TaskModel) {
         self.taskVM = taskVM
@@ -17,10 +18,19 @@ struct UpdateView: View {
     
     var body: some View {
         Form {
-            VStack {
-                TextField("Update Task", text: $task)
-                    .frame(height: 55)
-                    .fontWeight(.semibold)
+            TextField("Update Task", text: $task)
+                .frame(height: 55)
+                .fontWeight(.semibold)
+            Section("Sub Tasks") {
+                List {
+                    ForEach(0..<textSubTasks.count, id: \.self) { index in
+                        TextField("Enter sub task here...", text: $textSubTasks[index])
+                    }
+                    .onDelete(perform: removeField)
+                    Button(action: addField) {
+                        Label("Add Sub Task", systemImage: "plus")
+                    }
+                }
             }
         }
         .navigationTitle("Edit")
@@ -30,6 +40,14 @@ struct UpdateView: View {
                 dismiss()
             }
         }
+    }
+    
+    func addField() {
+        textSubTasks.append("")
+    }
+    
+    func removeField(at offsets: IndexSet) {
+        textSubTasks.remove(atOffsets: offsets)
     }
 }
 
