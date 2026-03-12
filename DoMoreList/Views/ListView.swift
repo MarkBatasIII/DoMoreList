@@ -12,6 +12,11 @@ struct ListView: View {
                         NavigationLink(destination: UpdateView()) {
                             TaskListView(task: task)
                         }
+                        .onTapGesture {
+                            withAnimation(.linear) {
+                                taskVM.updateItem(task: task)
+                            }
+                        }
                     }
                     .onDelete(perform: taskVM.deleteItem)
                     .onMove(perform: taskVM.moveItem)

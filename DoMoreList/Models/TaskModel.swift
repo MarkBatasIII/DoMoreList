@@ -14,4 +14,12 @@ struct TaskModel: Identifiable, Codable {
         self.task = task
         self.isCompleted = isCompleted
     }
+    
+    func updateTaskModel() -> TaskModel {
+         return TaskModel(
+            id: id,
+            task: task,
+            isCompleted: !isCompleted
+         )
+    }
 }

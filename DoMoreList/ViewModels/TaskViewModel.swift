@@ -34,4 +34,10 @@ class TaskViewModel: ObservableObject {
     func deleteItem(at offsets: IndexSet) {
         tasks.remove(atOffsets: offsets)
     }
+    
+    func updateItem(task: TaskModel ) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks[index] = task.updateTaskModel()
+        }
+    }
 }
