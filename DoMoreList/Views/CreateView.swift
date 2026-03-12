@@ -10,15 +10,10 @@ struct CreateView: View {
     @State private var showingError = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-                TextField("What do you want to do?", text: $textFieldCreate)
-                    .padding(.horizontal)
-                    .frame(height: 55)
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(10)
-            }
-            .padding(14)
+        Form {
+            TextField("Task Name", text: $textFieldCreate)
+                .frame(height: 55)
+                .fontWeight(.semibold)
         }
         .navigationTitle("Create Task")
         .toolbar {

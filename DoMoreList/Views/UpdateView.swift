@@ -8,12 +8,13 @@ struct UpdateView: View {
     var taskModel: TaskModel
     
     @State private var task: String
-    @State private var textSubTasks: [String] = []
+    @State private var subTasks: [SubTaskModel]
     
     init(taskVM: TaskViewModel, taskModel: TaskModel) {
         self.taskVM = taskVM
         self.taskModel = taskModel
         _task = State(initialValue: taskModel.task)
+        _subTasks = State(initialValue: taskModel.subTasks)
     }
     
     var body: some View {
@@ -22,13 +23,18 @@ struct UpdateView: View {
                 .frame(height: 55)
                 .fontWeight(.semibold)
             Section("Sub Tasks") {
-                List {
-                    ForEach(0..<textSubTasks.count, id: \.self) { index in
-                        TextField("Enter sub task here...", text: $textSubTasks[index])
-                    }
-                    .onDelete(perform: removeField)
-                    Button(action: addField) {
-                        Label("Add Sub Task", systemImage: "plus")
+                ForEach($subTasks) { $subTask in
+                        TextField("Subtask Name", text: $subTask.subTask)
+                }
+                .onDelete { indexSet in
+                    subTasks.remove(atOffsets: indexSet)
+                }
+                Button(action: {
+                    subTasks.append(SubTaskModel(subTask: "", isSubCompleted: false))
+                }) {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("Add Subtask")
                     }
                 }
             }
@@ -36,18 +42,10 @@ struct UpdateView: View {
         .navigationTitle("Edit")
         .toolbar {
             Button("Update") {
-                taskVM.updateItem(task: taskModel, newTask: task)
+                taskVM.updateItem(task: taskModel, newTask: task, newSubTasks: subTasks)
                 dismiss()
             }
         }
-    }
-    
-    func addField() {
-        textSubTasks.append("")
-    }
-    
-    func removeField(at offsets: IndexSet) {
-        textSubTasks.remove(atOffsets: offsets)
     }
 }
 

@@ -41,20 +41,14 @@ class TaskViewModel: ObservableObject {
         }
     }
     
-    func updateItem(task: TaskModel, newTask: String) {
+    func updateItem(task: TaskModel, newTask: String, newSubTasks: [SubTaskModel]) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index] = TaskModel(
                 id: task.id,
                 task: newTask,
-                isCompleted: task.isCompleted
+                isCompleted: task.isCompleted,
+                subTasks: newSubTasks
             )
-            saveItems()
-        }
-    }
-    
-    func saveItems() {
-        if let encodedData = try? JSONEncoder().encode(tasks) {
-            UserDefaults.standard.set(encodedData, forKey: "Items")
         }
     }
 }
