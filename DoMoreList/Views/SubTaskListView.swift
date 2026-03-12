@@ -12,7 +12,6 @@ struct SubTaskListView: View {
             Spacer()
         }
         .font(.subheadline)
-        .padding(.leading, 30)
         .padding(.top, 5)
         .strikethrough(subTask.isSubCompleted, color: .gray)
         .foregroundColor(subTask.isSubCompleted ? .secondary : .primary)

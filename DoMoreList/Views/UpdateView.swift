@@ -49,6 +49,7 @@ struct UpdateView: View {
             }
         }
         .navigationTitle("Edit")
+        .scrollBounceBehavior(.basedOnSize)
         .toolbar {
             Button("Update") {
                 if isFormValid {

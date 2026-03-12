@@ -6,42 +6,49 @@ struct ListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(taskVM.tasks) { task in
-                    VStack {
-                        NavigationLink(destination: UpdateView(taskVM: taskVM, taskModel: task)) {
-                            TaskListView(task: task)
-                                .onTapGesture {
-                                    withAnimation(.linear) {
-                                        taskVM.updateTaskCompleted(task: task)
+            ScrollView {
+                LazyVStack {
+                    ForEach(taskVM.tasks) { task in
+                        GroupBox {
+                            NavigationLink(destination: UpdateView(taskVM: taskVM, taskModel: task)) {
+                                TaskListView(task: task)
+                                    .onTapGesture {
+                                        withAnimation(.linear) {
+                                            taskVM.updateTaskCompleted(task: task)
+                                        }
+                                    }
+                                Image(systemName: "pencil")
+                                    .font(.title3)
+                                    .foregroundStyle(.blue)
+                                
+                            }
+                            if !task.subTasks.isEmpty {
+                                DisclosureGroup("\(task.subTasks.count) \(Image(systemName: "rectangle.3.group"))") {
+                                    ForEach(task.subTasks) { subTask in
+                                        SubTaskListView(subTask: subTask)
+                                            .listRowInsets(EdgeInsets())
+                                            .onTapGesture {
+                                                withAnimation(.linear) {
+                                                    taskVM.updateSubTaskCompleted(task: task, subTask: subTask)
+                                                }
+                                            }
                                     }
                                 }
-                        }
-                        if !task.subTasks.isEmpty {
-                            DisclosureGroup("You have \(task.subTasks.count) sub task\(task.subTasks.count > 1 ? "s" : "")") {
-                                ForEach(task.subTasks) { subTask in
-                                    SubTaskListView(subTask: subTask)
-                                        .onTapGesture {
-                                            withAnimation(.linear) {
-                                                taskVM.updateSubTaskCompleted(task: task, subTask: subTask)
-                                            }
-                                        }
-                                }
+                                .padding(.leading, 28)
+                                .padding(.trailing, 7)
+                                .font(.subheadline)
                             }
-                            .font(.subheadline)
                         }
+                        .padding(.horizontal, 15)
                     }
+                    .onDelete(perform: taskVM.deleteItem)
+                    .onMove(perform: taskVM.moveItem)
                 }
-                .onDelete(perform: taskVM.deleteItem)
-                .onMove(perform: taskVM.moveItem)
             }
             .navigationTitle("Do More List")
-            .navigationViewStyle(StackNavigationViewStyle())
+            .scrollBounceBehavior(.basedOnSize)
             .toolbar {
                 if !taskVM.tasks.isEmpty {
-                    ToolbarItemGroup(placement: .navigationBarLeading) {
-                        EditButton()
-                    }
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         NavigationLink(destination: CreateView(taskVM: taskVM)) {
                             Image(systemName: "plus")

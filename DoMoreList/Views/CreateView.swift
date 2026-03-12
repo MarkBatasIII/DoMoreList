@@ -16,6 +16,7 @@ struct CreateView: View {
                 .fontWeight(.semibold)
         }
         .navigationTitle("Create Task")
+        .scrollBounceBehavior(.basedOnSize)
         .toolbar {
             Button("Save") {
                 if checkInput() {

@@ -13,7 +13,6 @@ struct TaskListView: View {
             Spacer()
         }
         .font(.headline)
-        .padding(.vertical, 5)
         .strikethrough(task.isCompleted, color: .gray)
         .foregroundColor(task.isCompleted ? .secondary : .primary)
     }
