@@ -6,8 +6,7 @@ struct ListView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                LazyVStack {
+            List {
                     ForEach(taskVM.tasks) { task in
                         GroupBox {
                             NavigationLink(destination: UpdateView(taskVM: taskVM, taskModel: task)) {
@@ -39,16 +38,19 @@ struct ListView: View {
                                 .font(.subheadline)
                             }
                         }
-                        .padding(.horizontal, 15)
+                        .listRowSeparator(.hidden)
                     }
                     .onDelete(perform: taskVM.deleteItem)
                     .onMove(perform: taskVM.moveItem)
-                }
             }
-            .navigationTitle("Do More List")
+            .listStyle(.plain)
+            .navigationTitle("Do More")
             .scrollBounceBehavior(.basedOnSize)
             .toolbar {
                 if !taskVM.tasks.isEmpty {
+                    ToolbarItemGroup(placement: .navigationBarLeading) {
+                        EditButton()
+                    }
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         NavigationLink(destination: CreateView(taskVM: taskVM)) {
                             Image(systemName: "plus")
