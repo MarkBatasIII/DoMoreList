@@ -17,11 +17,11 @@
 		4D6130672F61C1BB004069C8 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6130662F61C1BB004069C8 /* TaskListView.swift */; };
 		4D6130692F61C514004069C8 /* UpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6130682F61C514004069C8 /* UpdateView.swift */; };
 		4DCB9F432F6314A10025B830 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCB9F422F6314A10025B830 /* ProfileView.swift */; };
-		4DCB9F452F6314BA0025B830 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCB9F442F6314BA0025B830 /* MenuView.swift */; };
 		4DCB9F472F6314D90025B830 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCB9F462F6314D90025B830 /* MainView.swift */; };
 		4DCB9F492F6315520025B830 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCB9F482F6315520025B830 /* LaunchScreen.storyboard */; };
 		4DDF883C2F62802A00B7D877 /* SubTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDF883B2F62802A00B7D877 /* SubTaskModel.swift */; };
 		4DDF883E2F629A0800B7D877 /* SubTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDF883D2F629A0800B7D877 /* SubTaskListView.swift */; };
+		4DE2162F2F68FE8A002E1237 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE2162E2F68FE8A002E1237 /* CategoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,11 +36,11 @@
 		4D6130662F61C1BB004069C8 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		4D6130682F61C514004069C8 /* UpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateView.swift; sourceTree = "<group>"; };
 		4DCB9F422F6314A10025B830 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		4DCB9F442F6314BA0025B830 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		4DCB9F462F6314D90025B830 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		4DCB9F482F6315520025B830 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4DDF883B2F62802A00B7D877 /* SubTaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskModel.swift; sourceTree = "<group>"; };
 		4DDF883D2F629A0800B7D877 /* SubTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskListView.swift; sourceTree = "<group>"; };
+		4DE2162E2F68FE8A002E1237 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,7 @@
 				4D61305D2F61B7E7004069C8 /* CreateView.swift */,
 				4D6130682F61C514004069C8 /* UpdateView.swift */,
 				4DCB9F422F6314A10025B830 /* ProfileView.swift */,
-				4DCB9F442F6314BA0025B830 /* MenuView.swift */,
+				4DE2162E2F68FE8A002E1237 /* CategoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,13 +197,13 @@
 			files = (
 				4D61304D2F61B015004069C8 /* DoMoreListApp.swift in Sources */,
 				4DCB9F472F6314D90025B830 /* MainView.swift in Sources */,
+				4DE2162F2F68FE8A002E1237 /* CategoryView.swift in Sources */,
 				4D61305E2F61B7E7004069C8 /* CreateView.swift in Sources */,
 				4DCB9F432F6314A10025B830 /* ProfileView.swift in Sources */,
 				4D6130612F61BA83004069C8 /* TaskModel.swift in Sources */,
 				4DDF883C2F62802A00B7D877 /* SubTaskModel.swift in Sources */,
 				4DDF883E2F629A0800B7D877 /* SubTaskListView.swift in Sources */,
 				4D6130652F61BBA3004069C8 /* TaskViewModel.swift in Sources */,
-				4DCB9F452F6314BA0025B830 /* MenuView.swift in Sources */,
 				4D61305C2F61B507004069C8 /* ListView.swift in Sources */,
 				4D6130692F61C514004069C8 /* UpdateView.swift in Sources */,
 				4D6130672F61C1BB004069C8 /* TaskListView.swift in Sources */,

@@ -5,9 +5,9 @@ struct MainView: View {
     
     var body: some View {
         TabView(selection: $selection) {
-            MenuView()
+            CategoryView()
                 .tabItem {
-                    Label("Menu", systemImage: "list.dash")
+                    Label("Category", systemImage: "list.dash")
                 }
                 .tag(0)
             ListView()
